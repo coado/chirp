@@ -6,6 +6,7 @@ import { api } from "~/utils/api";
 import type { RouterOutputs } from "~/utils/api";
 import Image from "next/image";
 import { LoadingPage, LoadingSpinner } from "~/components/loading";
+import Link from "next/link";
 
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -90,8 +91,12 @@ const PostView = (props: PostWithUser) => {
       />
       <div className="flex flex-col font-bold">
         <div className="flex gap-1 text-slate-300">
-          <span>{`@${author.username}`}</span>
-          <span>{` · ${dayjs(post.createdAt).fromNow()}`}</span>{" "}
+          <Link href={`/@${author.username}`}>
+            <span>{`@${author.username}`}</span>
+          </Link>
+          <Link href={`/post/${post.id}`}>
+            <span>{` · ${dayjs(post.createdAt).fromNow()}`}</span>{" "}
+          </Link>
         </div>
         <span className="text-xl">{post.content}</span>
       </div>
